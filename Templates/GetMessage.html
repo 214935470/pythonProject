@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Apartment Listings</title>
+    <style>
+        /* סגנונות כלליים */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        /* עיצוב רשת (Grid) */
+        .apartment-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 עמודות */
+            gap: 20px; /* ריווח בין הכרטיסים */
+        }
+
+        .apartment-card {
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .apartment-card h4 {
+            margin: 5px 0;
+        }
+
+        .apartment-images {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .apartment-images img {
+            width: 100px;
+            height: auto;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .no-image {
+            font-size: 14px;
+            color: #999;
+        }
+
+        .apartment-details {
+            margin-bottom: 10px;
+        }
+
+        .apartment-price {
+            font-size: 18px;
+            font-weight: bold;
+            color: #27ae60;
+        }
+
+        @media (max-width: 768px) {
+            .apartment-container {
+                grid-template-columns: repeat(2, 1fr); /* 2 עמודות במסכים קטנים */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .apartment-container {
+                grid-template-columns: 1fr; /* עמודה אחת במסכים קטנים מאוד */
+            }
+        }
+        #logout {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            width: 150px
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<h1>Messages:</h1>
+<a  href="{%url 'broker'%}"><button id="logout">exit ›</button></a>
+<ul class="apartment-container">
+    {% for message in messages %}
+    <li>
+        <div class="apartment-card">
+            <div class="apartment-details">
+                <h4>from: {{ message.name }}</h4>
+                <h4>message: {{message.body}}</h4>
+                <h4>email: {{message.email}}</h4>
+            </div>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

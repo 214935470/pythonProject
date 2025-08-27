@@ -1,0 +1,242 @@
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apartment Listings</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f4f4f9;
+        color: #333;
+    }
+
+    h1 {
+        text-align: center;
+        color: #4CAF50;
+        margin-bottom: 20px;
+    }
+
+    button {
+        padding: 10px 15px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+    a button {
+        margin-top: 10px;
+    }
+
+    .apartment-list {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .apartment-item {
+        background-color: #ffffff;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .apartment-images {
+        flex: 1;
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+    }
+
+    .apartment-images img {
+        width: 200px;
+        height: auto;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        object-fit: cover;
+    }
+
+    .apartment-details {
+        flex: 2;
+        text-align: left;
+    }
+
+    .apartment-details h4 {
+        margin: 5px 0;
+    }
+
+    .apartment-price {
+        font-size: 18px;
+        font-weight: bold;
+        color: #27ae60;
+    }
+
+    .sold-overlayy {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.4);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 36px;
+        font-weight: bold;
+        z-index: 2;
+        text-transform: uppercase;
+    }
+
+    .solld {
+        position: relative;
+    }
+
+    @media (max-width: 768px) {
+        .apartment-item {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .apartment-details {
+            text-align: center;
+        }
+
+        .apartment-images img {
+            width: 100%;
+            max-width: 300px;
+        }
+    }
+    #logout {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        width: 150px
+    }
+    #forAll {
+        position: absolute;
+        top: 15px;
+        right: 200px;
+        width: 200px
+    }
+
+</style>
+</head>
+<body>
+
+{% if error %}
+    <p style="color: red; text-align: center;">{{ error }}</p>
+{% else %}
+
+<h1>Apartment Listings</h1>
+<a  href="{%url 'login'%}"><button id="logout">logout »</button></a>
+<a  href="{%url 'buyer'%}"><button id="forAll">all apartments »</button></a>
+
+<a href="{% url 'NewApartment' %}"><button type="submit">Add+</button></a>
+<ul class="apartment-list">
+    {% for apartment in apartments %}
+        {% if apartment.status == True %}
+        <div class="solld">
+            <div class="sold-overlayy">sold </div>
+            <li class="apartment-item">
+                <div class="apartment-images">
+                    {% for image in images %}
+                        {% if image.apartmentId.id == apartment.id %}
+                            {% if image.image %}
+                                <img src="{{ image.image.url }}" alt="Apartment Image">
+                            {% else %}
+                                <span class="no-image">No image file available</span>
+                            {% endif %}
+                        {% endif %}
+                    {% empty %}
+                        <span class="no-image">No images available</span>
+                    {% endfor %}
+                </div>
+                <div class="apartment-details">
+                    <h4>Description: {{ apartment.description }}</h4>
+                    <h4>Status: {{ apartment.status }}</h4>
+                    <h4>Rooms: {{ apartment.rooms }}</h4>
+                    <h4>Floor: {{ apartment.floor }}</h4>
+                    <h4>House Number: {{ apartment.houseNumber }}</h4>
+                    <h4>City: {{ apartment.city }}</h4>
+                    <h4>Street: {{ apartment.street }}</h4>
+                    <h4>Neighborhood: {{ apartment.neighborhood }}</h4>
+                     <div class="apartment">
+                        <h4 class="apartment-price">Price: $<span class="price">{{ apartment.price }}</span></h4>
+                        <h1 class="apartment-price">commission:<h1 class="percentage">$</h1></h1>
+                    </div>
+
+                    <h4>Brokerage: {{ apartment.brokerage }}</h4>
+                    <a href="{% url 'GetMassages' apartment.id %}"><button type="submit">responses</button></a>
+                </div>
+            </li>
+        </div>
+        {% else %}
+        <li class="apartment-item">
+            <div class="apartment-images">
+                {% for image in images %}
+                    {% if image.apartmentId.id == apartment.id %}
+                        {% if image.image %}
+                            <img src="{{ image.image.url }}" alt="Apartment Image">
+                        {% else %}
+                            <span class="no-image">No image file available</span>
+                        {% endif %}
+                    {% endif %}
+                {% empty %}
+                    <span class="no-image">No images available</span>
+                {% endfor %}
+            </div>
+            <div class="apartment-details">
+                <h2>{{ apartment.description }}</h2>
+<!--                <h4>Status: {{ apartment.status }}</h4>-->
+                <h4>Rooms: {{ apartment.rooms }}</h4>
+                <h4>Floor: {{ apartment.floor }}</h4>
+                <h4>House Number: {{ apartment.houseNumber }}</h4>
+                <h4>City: {{ apartment.city }}</h4>
+                <h4>Street: {{ apartment.street }}</h4>
+                <h4>Neighborhood: {{ apartment.neighborhood }}</h4>
+                <h4 class="apartment-price">Price: ${{ apartment.price }}</h4>
+
+                <h4>Brokerage: {{ apartment.brokerage }}</h4>
+                <a href="{% url 'GetMassages' apartment.id %}"><button type="submit">responses</button></a>
+                 <a href="{% url 'mark_sold' apartment.id %}"><button type="submit">sold</button></a>
+            </div>
+        </li>
+
+        {% endif %}
+    {% endfor %}
+</ul>
+
+{% endif %}
+
+</body>
+</html>
+
+<script>
+    const apartments = document.querySelectorAll('.apartment');
+
+    apartments.forEach(apartment => {
+        const priceElement = apartment.querySelector('.price');
+        const percentageElement = apartment.querySelector('.percentage');
+        const price = parseFloat(priceElement.innerText);
+        const percentage = (price * 0.02).toFixed(2);
+        percentageElement.innerText = percentage;
+    });
+</script>

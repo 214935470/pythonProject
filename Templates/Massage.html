@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+         p {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+         h3 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+<!--        input[type="text"], input[type="password"], input[type="email"], input[type="tel"] {-->
+<!--            width: 100%;-->
+<!--            padding: 10px;-->
+<!--            margin: 10px 0;-->
+<!--            border: 1px solid #ddd;-->
+<!--            border-radius: 5px;-->
+<!--            font-size: 16px;-->
+<!--        }-->
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #4CAF50;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .error {
+            color: red;
+            text-align: center;
+            margin-top: 10px;
+        }
+        .link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+<!--        #cancle{-->
+<!--            background-color: #gray;-->
+<!--        }-->
+        #cancle:hover {
+            background-color: #b0b0b0; /* גוון אפור כהה יותר */
+        }
+        #cancle {
+            background-color: #d3d3d3; /* צבע אפור בהיר */
+            color: black; /* צבע טקסט שחור */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>contact_seller</h2>
+        <form method="post">
+            {% csrf_token %}
+            <h3>write your message</h3>
+            <p>{{ form.body }}</p>
+             <input type="text" name="name" placeholder="Name" required>
+             <input type="email" name="email" placeholder="Email" required>
+            <button >Send »</button>
+        </form>
+        <br/>
+        <a  href="{%url 'buyer'%}"><button id="cancle">cancle</button></a>
+    </div>
+
+</body>
+</html>

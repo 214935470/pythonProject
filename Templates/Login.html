@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome - Real Estate System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .main-container {
+            display: flex;
+            width: 90%;
+            max-width: 1200px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .welcome-section {
+            flex: 1;
+            padding: 40px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        .welcome-section h1 {
+            font-size: 24px;
+            color: #4CAF50;
+        }
+        .welcome-section p, .welcome-section ul {
+            font-size: 16px;
+            line-height: 1.8;
+            margin: 10px 0;
+        }
+        .welcome-section ul {
+            padding-left: 20px;
+            margin: 0;
+        }
+        .welcome-section ul li {
+            margin-bottom: 10px;
+        }
+        .login-section {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: white;
+        }
+        .login-section h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .new-user {
+            margin-top: 15px;
+            text-align: center;
+        }
+        .new-user a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        .new-user a:hover {
+            background-color: #0056b3;
+        }
+        .social-links {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .social-links a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #007bff;
+            font-size: 20px;
+        }
+        .social-links a:hover {
+            color: #0056b3;
+        }
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="welcome-section">
+            <h1>Welcome to the Real Estate System!</h1>
+            <p>Here you will find the ultimate solution for real estate transactions, easily and quickly:</p>
+            <ul>
+                <li>Selling a property? Publish your listing with a single click. Add details, photos, and indicate whether it's brokered or not.</li>
+                <li>Looking to buy a property? Filter through the listings by area, number of rooms, property condition, and more.</li>
+                <li>Direct and easy connection between buyers and sellers – contact them with just one click.</li>
+            </ul>
+            <p>The website offers a friendly, advanced, and reliable interface tailored to your needs.</p>
+            <p><strong>Start now – sign up as a buyer or seller and enjoy the perfect system for your real estate transactions!</strong></p>
+        </div>
+        <div class="login-section">
+            <h2>Login</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Login</button>
+            </form>
+             <div class="new-user">
+                <p>New here?</p>
+<!--                <a href="#"></a>-->
+                <a href="{%url 'Register'%}">Sign Up</a>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
