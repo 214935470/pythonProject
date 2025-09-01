@@ -24,7 +24,7 @@ class MassageForm(forms.ModelForm):
 
 
 class ApartmentForm(forms.ModelForm):
-    images = forms.ImageField(widget=forms.ClearableFileInput(attrs={'multiple': True}), required=False)
+    images = forms.ImageField(widget=forms.ClearableFileInput(), required=False)
 
     class Meta:
         model = Apartment
